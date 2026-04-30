@@ -1,0 +1,64 @@
+# Project Hercules: Industrial Analytics Dashboard
+
+Project Hercules is a high-precision, production-grade monitoring solution designed for industrial milling facilities. This platform provides real-time visibility into plant performance, extraction yields, and process anomalies using a decoupled **FastAPI** backend and **React** frontend.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Backend Setup (FastAPI)
+The backend handles data ingestion from the historian, mathematical KPI derivation, and statistical anomaly detection.
+
+```bash
+# Navigate to backend directory
+cd backend
+
+# Create and activate virtual environment
+python -m venv MINI_HERC
+source MINI_HERC/bin/activate  # On Windows: .\MINI_HERC\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start the API server
+uvicorn main:app --reload
+
+
+2. Frontend Setup (React + Vite)
+The frontend provides a clinical, high-density Bento Grid interface for operators.
+# Navigate to frontend directory
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+Tech Stack
+Backend: Python 3.11, FastAPI, Pandas, NumPy.
+
+Frontend: React 19, Tailwind CSS, Lucide React (Icons), Recharts.
+
+Data Source: Time-series Historian (CSV ingestion).
+
+Milestones (Updates)
+The project has transitioned from a basic Streamlit script to a robust, scalable architecture. Key technical updates include:
+
+1. Data Logic & Physical Constraints
+Yield Stabilization: Implemented strict mathematical caps on Extraction Yield (99.9%) to prevent data noise from reporting physically impossible values (previously >100%).
+
+Schedule Enforcement: Integrated plant operating hours (Mon–Sat, 06:00–22:00). The system now automatically recognizes "Off-Shift" states and zeroes out throughput rate to maintain data integrity.
+
+Startup Masking: Configured the anomaly engine to ignore the 6:00 AM startup window, preventing false moisture alerts during machine warm-up cycles.
+
+2. UI/UX Evolution (The "Single-Page Rule")
+Bento Grid Layout: Restructured the dashboard into a high-density grid, allowing operators to view all critical KPIs and 24-hour trends on one screen without scrolling.
+
+Semantic Feedback: Established a dynamic status system. Tiles change color (Green/Amber/Grey) based on live sensor thresholds to provide immediate visual feedback on plant health.
+
+Interactive Trends: Integrated a high-fidelity line chart visualizing actual production against the 15,000 kg/h capacity target.
+
+3. Architecture & Connectivity
+API Decoupling: Migrated to a FastAPI-React bridge to allow for independent scaling of the data engine and the presentation layer.
+
+Date Range Readiness: Established the global sidebar architecture for future multi-date historical reporting.
